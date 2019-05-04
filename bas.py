@@ -4,21 +4,22 @@ import pandas as pd
 import glob
 import heapq
 
-
 class search():
     def __init__(self):
         pass
 
-    def __hey__(self):
-        print('yo')
 
+    def __my_metric__(self, dist_type, a, b):
 
-    def my_metric(self, a, b):
-        a = np.array(a)
-        b = np.array(b)
-        return a @ b
+        if dist_type == 'jaccard'
+            return jaccard_similarity_score(a, b, normalize=True)
+        else:
+            #assume cosine similarity
+            return 1 - spatial.distance.cosine(dataSetI, dataSetII)
 
     def find_nearest(self, files, target):
+
+
         H = []
         heapq.heapify(H)
 
@@ -30,7 +31,9 @@ class search():
 
             for row in df.values:
 
-                distance = self.my_metric(target, row)
+                distance = self.__my_metric__(target, row)
+
+
                 neighbor = (distance, row[1:])
                 if len(H) < 10:
                     push(H, neighbor)

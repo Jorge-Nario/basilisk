@@ -4,6 +4,10 @@ import pandas as pd
 import glob
 import heapq
 
+from scipy import spatial
+from sklearn.metrics import jaccard_similarity_score
+
+
 class search():
     def __init__(self):
         pass
@@ -11,15 +15,13 @@ class search():
 
     def __my_metric__(self, dist_type, a, b):
 
-        if dist_type == 'jaccard'
+        if dist_type == 'jaccard':
             return jaccard_similarity_score(a, b, normalize=True)
         else:
             #assume cosine similarity
             return 1 - spatial.distance.cosine(dataSetI, dataSetII)
 
-    def find_nearest(self, files, target):
-
-
+    def find_nearest(self, files, target, k = 10):
         H = []
         heapq.heapify(H)
 
@@ -35,8 +37,9 @@ class search():
 
 
                 neighbor = (distance, row[1:])
-                if len(H) < 10:
+                if len(H) < k:
                     push(H, neighbor)
+
                 else:
                     furthest_saved_neighbor = pop(H)
 

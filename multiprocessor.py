@@ -20,6 +20,16 @@ class Multiprocessor:
     def run_jobs(self):
         return self.__multithreader()
     
+    def reset(self, processors=None):
+        self.commands = []
+        self.processors = processors
+    
+    def map_multi(self, function, iterator):
+        self.reset()
+        for item in iterator:
+            self.submit_job(function, item)
+        return self.run_jobs()
+    
     def __multithreader(self):
         with Pool(processes=self.processors) as pool:
             results = [pool.apply_async(function, args = args, kwds = kwargs) for function, args, kwargs in self.commands]
